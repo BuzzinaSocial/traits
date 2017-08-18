@@ -1,0 +1,2 @@
+# traits
+Global Traits
