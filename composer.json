@@ -1,0 +1,30 @@
+{
+  "name": "hubtodo/traits",
+  "description": "Global Traits",
+  "keywords": ["libraries", "Traits"],
+  "license": "MIT",
+  "type": "libraries",
+  "support": {
+    "issues": "https://github.com/HubToDo/traits/issues",
+    "source": "https://github.com/HubToDo/traits"
+  },
+  "authors": [
+    {
+      "name": "Jean Cesar Garcia",
+      "email": "jeancesargarcia@gmail.com"
+    }
+  ],
+  "require": {
+    "php": ">=7.1"
+  },
+  "autoload": {
+    "psr-4": {
+      "HubToDo\\SkyHub\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "HubToDo\\SkyHub\\Tests\\": "tests/"
+    }
+  }
+}
