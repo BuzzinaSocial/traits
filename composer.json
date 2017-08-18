@@ -24,12 +24,12 @@
   },
   "autoload": {
     "psr-4": {
-      "HubToDo\\SkyHub\\": "src/"
+      "HubToDo\\Traits\\": "src/"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "HubToDo\\SkyHub\\Tests\\": "tests/"
+      "HubToDo\\Traits\\Tests\\": "tests/"
     }
   }
 }
