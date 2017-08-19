@@ -92,4 +92,24 @@ class JsonRenderTest extends \PHPUnit_Framework_TestCase
 
         return $objects;
     }
+
+    /**
+     * @dataProvider validJsonProvider
+     */
+    public function testStringToObjectSuccess($string)
+    {
+        $this->assertInstanceOf(\stdClass::class, $this->json_render->stringToObject($string));
+        $this->assertEquals($this->json_render->jsonDecode($string), $this->json_render->stringToObject($string));
+    }
+
+    /**
+     * @dataProvider invalidJsonProvider
+     */
+    public function testStringToObjectFailure($string)
+    {
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage('json_decode error: Syntax error');
+
+        $this->json_render->stringToObject($string);
+    }
 }

@@ -3,6 +3,7 @@
 namespace HubToDo\Traits;
 
 use InvalidArgumentException;
+use stdClass;
 
 /**
  * Trait JsonRender.
@@ -55,5 +56,10 @@ trait JsonRender
         }
 
         return $json;
+    }
+
+    public function stringToObject(string $string): stdClass
+    {
+        return $this->jsonDecode($string);
     }
 }
