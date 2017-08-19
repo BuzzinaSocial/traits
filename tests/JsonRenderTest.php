@@ -11,12 +11,12 @@ class JsonRenderTest extends \PHPUnit_Framework_TestCase
 {
     private $json_render;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->json_render = $this->getMockForTrait(\HubToDo\Traits\JsonRender::class);
     }
 
-    public function validJsonProvider()
+    public function validJsonProvider(): array
     {
         return [
             ['{"b2w": {"main": null, "show": "CARREGADORES", "categories": {"familyId": 4, "categoryId": 18, "subFamilyId": 1, "subCategoryId": 2577}}}'],
@@ -30,7 +30,7 @@ class JsonRenderTest extends \PHPUnit_Framework_TestCase
         ];
     }
 
-    public function invalidJsonSintaxeProvider()
+    public function invalidJsonSintaxeProvider(): array
     {
         return [
             [""],
@@ -45,7 +45,7 @@ class JsonRenderTest extends \PHPUnit_Framework_TestCase
         ];
     }
 
-    public function objectProvider()
+    public function objectProvider(): array
     {
         $jsons = $this->validJsonProvider();
 
