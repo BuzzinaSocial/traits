@@ -58,8 +58,19 @@ trait JsonRender
         return $json;
     }
 
-    public function stringToObject(string $string): stdClass
+    /**
+     * Convert string to object.
+     *
+     * @param string $string
+     *
+     * @return stdClass
+     */
+    public function toObject($string): stdClass
     {
-        return $this->jsonDecode($string);
+        if (is_string($string)) {
+            return $this->jsonDecode($string);
+        }
+
+        return $this->jsonDecode($this->jsonEncode($string));
     }
 }

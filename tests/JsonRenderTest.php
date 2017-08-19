@@ -25,7 +25,7 @@ class JsonRenderTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @dataProvider invalidJsonProvider
+     * @dataProvider invalidJsonSintaxeProvider
      */
     public function testJsonDecodeFailure($json_invalid)
     {
@@ -65,7 +65,7 @@ class JsonRenderTest extends \PHPUnit_Framework_TestCase
         ];
     }
 
-    public function invalidJsonProvider()
+    public function invalidJsonSintaxeProvider()
     {
         return [
             [""],
@@ -96,20 +96,35 @@ class JsonRenderTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider validJsonProvider
      */
-    public function testStringToObjectSuccess($string)
+    public function testToObjectSuccess($json)
     {
-        $this->assertInstanceOf(\stdClass::class, $this->json_render->stringToObject($string));
-        $this->assertEquals($this->json_render->jsonDecode($string), $this->json_render->stringToObject($string));
+        $json_object = $this->json_render->toObject($json);
+        $this->assertInstanceOf(\stdClass::class, $json_object);
+        $this->assertEquals(json_decode($json), $json_object);
+
+        $array = json_decode($json, true);
+        $array_object = $this->json_render->toObject($array);
+
+        $this->assertInstanceOf(\stdClass::class, $array_object);
+        $this->assertEquals(json_decode($json), $array_object);
     }
 
     /**
-     * @dataProvider invalidJsonProvider
+     * @dataProvider invalidJsonSintaxeProvider
      */
-    public function testStringToObjectFailure($string)
+    public function testToObjectSintaxeFailure($string)
     {
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('json_decode error: Syntax error');
 
-        $this->json_render->stringToObject($string);
+        $this->json_render->toObject($string);
+    }
+
+    public function testToObjectMalformedFailure()
+    {
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage('json_decode error: Malformed UTF-8 characters, possibly incorrectly encoded');
+
+        $this->json_render->toObject("\xB1\x31");
     }
 }
