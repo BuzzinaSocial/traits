@@ -31,6 +31,7 @@ class JsonRenderTest extends \PHPUnit_Framework_TestCase
     {
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('json_decode error: Syntax error');
+
         $this->json_render->jsonDecode($json_invalid);
     }
 
@@ -44,12 +45,10 @@ class JsonRenderTest extends \PHPUnit_Framework_TestCase
 
     public function testJsonEncodeFailure()
     {
-        $text = "\xB1\x31";
-
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('json_encode error: Malformed UTF-8 characters, possibly incorrectly encoded');
 
-        print_r($this->json_render->jsonEncode($text));
+        $this->json_render->jsonEncode("\xB1\x31");
     }
 
     public function validJsonProvider()
