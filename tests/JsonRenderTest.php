@@ -25,7 +25,7 @@ class JsonRenderTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @dataProvider jsonDecodeProvider
+     * @dataProvider jsonDecodeErrorProvider
      */
     public function testJsonDecodeFailure($json_invalid)
     {
@@ -42,6 +42,16 @@ class JsonRenderTest extends \PHPUnit_Framework_TestCase
         $this->assertInternalType('string', $this->json_render->jsonEncode($object));
     }
 
+    public function testJsonEncodeFailure()
+    {
+        $text = "\xB1\x31";
+
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage('json_encode error: Malformed UTF-8 characters, possibly incorrectly encoded');
+
+        print_r($this->json_render->jsonEncode($text));
+    }
+
     public function jsonEncodeProvider()
     {
         return [
@@ -56,9 +66,10 @@ class JsonRenderTest extends \PHPUnit_Framework_TestCase
         ];
     }
 
-    public function jsonDecodeProvider()
+    public function jsonDecodeErrorProvider()
     {
         return [
+            [""],
             ['{"b2w": {"main": null, "show": "CARREGADORES",, "categories": {"familyId": 4, "categoryId": 18, "subFamilyId": 1, "subCategoryId": 2577}}}'],
             ['{"unit": null, "width": null, "height": 1, "length": 1,1 "weight": 4, "weight_brute": null, "weight_liquid": null}'],
             ['{"b2w": {"shoptime": {"cost": null, "offer": 84.99, w"plots": null, "default": 129.99}, "submarino": {"cost": null, "offer": 84.99, "plots": null, "default": 129.99}, "americanas": {"cost": null, "offer": 84.99, "plots": null, "default": 129.99}}}'],

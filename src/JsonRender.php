@@ -3,7 +3,6 @@
 namespace HubToDo\Traits;
 
 use InvalidArgumentException;
-use stdClass;
 
 /**
  * Trait JsonRender.
@@ -47,7 +46,7 @@ trait JsonRender
      * @throws InvalidArgumentException if the JSON cannot be encoded.
      * @link http://www.php.net/manual/en/function.json-encode.php
      */
-    function jsonEncode($value, int $options = 0, int $depth = 512)
+    function jsonEncode($value, int $options = 0, int $depth = 512): string
     {
         $json = json_encode($value, $options, $depth);
 
