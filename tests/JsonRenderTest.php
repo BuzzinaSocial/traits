@@ -16,41 +16,6 @@ class JsonRenderTest extends \PHPUnit_Framework_TestCase
         $this->json_render = $this->getMockForTrait(\HubToDo\Traits\JsonRender::class);
     }
 
-    /**
-     * @dataProvider validJsonProvider
-     */
-    public function testJsonDecodeSuccess($json)
-    {
-        $this->assertInstanceOf(\stdClass::class, $this->json_render->jsonDecode($json));
-    }
-
-    /**
-     * @dataProvider invalidJsonSintaxeProvider
-     */
-    public function testJsonDecodeFailure($json_invalid)
-    {
-        $this->expectException(\InvalidArgumentException::class);
-        $this->expectExceptionMessage('json_decode error: Syntax error');
-
-        $this->json_render->jsonDecode($json_invalid);
-    }
-
-    /**
-     * @dataProvider objectProvider
-     */
-    public function testJsonEncodeSuccess($object)
-    {
-        $this->assertInternalType('string', $this->json_render->jsonEncode($object));
-    }
-
-    public function testJsonEncodeFailure()
-    {
-        $this->expectException(\InvalidArgumentException::class);
-        $this->expectExceptionMessage('json_encode error: Malformed UTF-8 characters, possibly incorrectly encoded');
-
-        $this->json_render->jsonEncode("\xB1\x31");
-    }
-
     public function validJsonProvider()
     {
         return [
@@ -96,6 +61,41 @@ class JsonRenderTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider validJsonProvider
      */
+    public function testJsonDecodeSuccess($json)
+    {
+        $this->assertInstanceOf(\stdClass::class, $this->json_render->jsonDecode($json));
+    }
+
+    /**
+     * @dataProvider invalidJsonSintaxeProvider
+     */
+    public function testJsonDecodeFailure($json_invalid)
+    {
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage('json_decode error: Syntax error');
+
+        $this->json_render->jsonDecode($json_invalid);
+    }
+
+    /**
+     * @dataProvider objectProvider
+     */
+    public function testJsonEncodeSuccess($object)
+    {
+        $this->assertInternalType('string', $this->json_render->jsonEncode($object));
+    }
+
+    public function testJsonEncodeFailure()
+    {
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage('json_encode error: Malformed UTF-8 characters, possibly incorrectly encoded');
+
+        $this->json_render->jsonEncode("\xB1\x31");
+    }
+
+    /**
+     * @dataProvider validJsonProvider
+     */
     public function testToObjectSuccess($json)
     {
         $json_object = $this->json_render->toObject($json);
@@ -126,5 +126,40 @@ class JsonRenderTest extends \PHPUnit_Framework_TestCase
         $this->expectExceptionMessage('json_decode error: Malformed UTF-8 characters, possibly incorrectly encoded');
 
         $this->json_render->toObject("\xB1\x31");
+    }
+
+    /**
+     * @dataProvider validJsonProvider
+     */
+    public function testToArraySuccess($json)
+    {
+        $json_array = $this->json_render->toArray($json);
+        $this->assertInternalType('array', $json_array);
+        $this->assertEquals(json_decode($json, true), $json_array);
+
+        $object = json_decode($json);
+        $object_array = $this->json_render->toArray($object);
+
+        $this->assertInternalType('array', $object_array);
+        $this->assertEquals(json_decode($json, true), $object_array);
+    }
+
+    /**
+     * @dataProvider invalidJsonSintaxeProvider
+     */
+    public function testToArraySintaxeFailure($string)
+    {
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage('json_decode error: Syntax error');
+
+        $this->json_render->toArray($string);
+    }
+
+    public function testToArrayMalformedFailure()
+    {
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage('json_decode error: Malformed UTF-8 characters, possibly incorrectly encoded');
+
+        $this->json_render->toArray("\xB1\x31");
     }
 }

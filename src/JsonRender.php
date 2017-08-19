@@ -59,9 +59,9 @@ trait JsonRender
     }
 
     /**
-     * Convert string to object.
+     * Convert to object.
      *
-     * @param string $string
+     * @param mixed $string
      *
      * @return stdClass
      */
@@ -72,5 +72,21 @@ trait JsonRender
         }
 
         return $this->jsonDecode($this->jsonEncode($string));
+    }
+
+    /**
+     * Convert to array.
+     *
+     * @param mixed $paramns
+     *
+     * @return array
+     */
+    public function toArray($paramns): array
+    {
+        if (is_string($paramns)) {
+            return $this->jsonDecode($paramns, true);
+        }
+
+        return $this->jsonDecode($this->jsonEncode($paramns), true);
     }
 }
