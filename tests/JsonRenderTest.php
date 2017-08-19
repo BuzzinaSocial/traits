@@ -17,7 +17,7 @@ class JsonRenderTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @dataProvider jsonEncodeProvider
+     * @dataProvider validJsonProvider
      */
     public function testJsonDecodeSuccess($json)
     {
@@ -25,7 +25,7 @@ class JsonRenderTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @dataProvider jsonDecodeErrorProvider
+     * @dataProvider invalidJsonProvider
      */
     public function testJsonDecodeFailure($json_invalid)
     {
@@ -52,7 +52,7 @@ class JsonRenderTest extends \PHPUnit_Framework_TestCase
         print_r($this->json_render->jsonEncode($text));
     }
 
-    public function jsonEncodeProvider()
+    public function validJsonProvider()
     {
         return [
             ['{"b2w": {"main": null, "show": "CARREGADORES", "categories": {"familyId": 4, "categoryId": 18, "subFamilyId": 1, "subCategoryId": 2577}}}'],
@@ -66,7 +66,7 @@ class JsonRenderTest extends \PHPUnit_Framework_TestCase
         ];
     }
 
-    public function jsonDecodeErrorProvider()
+    public function invalidJsonProvider()
     {
         return [
             [""],
@@ -83,7 +83,7 @@ class JsonRenderTest extends \PHPUnit_Framework_TestCase
 
     public function objectProvider()
     {
-        $jsons = $this->jsonEncodeProvider();
+        $jsons = $this->validJsonProvider();
 
         $objects = [];
 
