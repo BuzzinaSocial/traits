@@ -16,8 +16,7 @@ trait JsonRender
      * Wrapper for json_decode that throws when an error occurs.
      *
      * @param string $json    JSON data to parse
-     * @param bool $assoc     When true, returned objects will be converted
-     *                        into associative arrays.
+     * @param bool   $assoc     When true, returned objects will be converted into associative arrays.
      * @param int    $depth   User specified recursion depth.
      * @param int    $options Bitmask of JSON decode options.
      *
@@ -25,7 +24,7 @@ trait JsonRender
      * @throws InvalidArgumentException if the JSON cannot be decoded.
      * @link http://www.php.net/manual/en/function.json-decode.php
      */
-    function jsonDecode($json, $assoc = false, $depth = 512, $options = 0): stdClass
+    function jsonDecode(string $json, bool $assoc = false, $depth = 512, int $options = 0)
     {
         $data = json_decode($json, $assoc, $depth, $options);
 
@@ -48,7 +47,7 @@ trait JsonRender
      * @throws InvalidArgumentException if the JSON cannot be encoded.
      * @link http://www.php.net/manual/en/function.json-encode.php
      */
-    function jsonEncode($value, $options = 0, $depth = 512)
+    function jsonEncode($value, int $options = 0, int $depth = 512)
     {
         $json = json_encode($value, $options, $depth);
 
