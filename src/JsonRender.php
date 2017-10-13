@@ -1,14 +1,14 @@
 <?php
 
-namespace HubToDo\Traits;
+namespace BuzzinaSocial\Traits;
 
-use InvalidArgumentException;
 use stdClass;
+use InvalidArgumentException;
 
 /**
  * Trait JsonRender.
  *
- * @package HubToDo\Traits
+ * @package BuzzinaSocial\Traits
  */
 trait JsonRender
 {

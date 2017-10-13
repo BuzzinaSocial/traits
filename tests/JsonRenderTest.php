@@ -1,11 +1,11 @@
 <?php
 
-namespace HubToDo\Traits\Tests;
+namespace BuzzinaSocial\Traits\Tests;
 
 /**
  * Class JsonRenderTests.
  *
- * @package HubToDo\Traits\Tests
+ * @package BuzzinaSocial\Traits\Tests
  */
 class JsonRenderTest extends \PHPUnit_Framework_TestCase
 {
@@ -13,7 +13,7 @@ class JsonRenderTest extends \PHPUnit_Framework_TestCase
 
     protected function setUp(): void
     {
-        $this->json_render = $this->getMockForTrait(\HubToDo\Traits\JsonRender::class);
+        $this->json_render = $this->getMockForTrait(\BuzzinaSocial\Traits\JsonRender::class);
     }
 
     public function validJsonProvider(): array

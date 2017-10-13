@@ -1,12 +1,12 @@
 {
-  "name": "hubtodo/traits",
+  "name": "BuzzinaSocial/traits",
   "description": "Global Traits",
   "keywords": ["libraries", "Traits"],
   "license": "MIT",
   "type": "libraries",
   "support": {
-    "issues": "https://github.com/HubToDo/traits/issues",
-    "source": "https://github.com/HubToDo/traits"
+    "issues": "https://github.com/BuzzinaSocial/traits/issues",
+    "source": "https://github.com/BuzzinaSocial/traits"
   },
   "authors": [
     {
@@ -24,12 +24,12 @@
   },
   "autoload": {
     "psr-4": {
-      "HubToDo\\Traits\\": "src/"
+      "BuzzinaSocial\\Traits\\": "src/"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "HubToDo\\Traits\\Tests\\": "tests/"
+      "BuzzinaSocial\\Traits\\Tests\\": "tests/"
     }
   }
 }
