@@ -4,6 +4,11 @@ namespace BuzzinaSocial\Traits;
 
 use stdClass;
 use InvalidArgumentException;
+use BuzzinaSocial\Traits\Exceptions\JsonException;
+
+use function json_decode;
+use function json_last_error;
+use function json_last_error_msg;
 
 /**
  * Trait JsonRender.
@@ -29,7 +34,7 @@ trait JsonRender
         $data = json_decode($json, $assoc, $depth, $options);
 
         if (JSON_ERROR_NONE !== json_last_error()) {
-            throw new InvalidArgumentException('json_decode error: ' . json_last_error_msg());
+            throw new JsonException('json_decode error: ' . json_last_error_msg());
         }
 
         return $data;
@@ -52,7 +57,7 @@ trait JsonRender
         $json = json_encode($value, $options, $depth);
 
         if (JSON_ERROR_NONE !== json_last_error()) {
-            throw new InvalidArgumentException('json_encode error: ' . json_last_error_msg());
+            throw new JsonException('json_encode error: ' . json_last_error_msg());
         }
 
         return $json;
