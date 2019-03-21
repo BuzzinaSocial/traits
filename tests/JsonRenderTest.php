@@ -2,12 +2,14 @@
 
 namespace BuzzinaSocial\Traits\Tests;
 
+use PHPUnit\Framework\TestCase;
+
 /**
  * Class JsonRenderTests.
  *
  * @package BuzzinaSocial\Traits\Tests
  */
-class JsonRenderTest extends \PHPUnit_Framework_TestCase
+class JsonRenderTest extends TestCase
 {
     private $json_render;
 

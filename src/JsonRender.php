@@ -30,7 +30,7 @@ trait JsonRender
      *
      * @link http://www.php.net/manual/en/function.json-decode.php
      */
-    function jsonDecode(string $json, bool $assoc = false, int $depth = 512, int $options = 0): mixed
+    function jsonDecode(string $json, bool $assoc = false, int $depth = 512, int $options = 0)
     {
         $data = json_decode($json, $assoc, $depth, $options);
 
