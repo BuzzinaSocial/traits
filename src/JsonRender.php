@@ -27,9 +27,10 @@ trait JsonRender
      *
      * @return mixed
      * @throws InvalidArgumentException if the JSON cannot be decoded.
+     *
      * @link http://www.php.net/manual/en/function.json-decode.php
      */
-    function jsonDecode(string $json, bool $assoc = false, $depth = 512, int $options = 0)
+    function jsonDecode(string $json, bool $assoc = false, int $depth = 512, int $options = 0): mixed
     {
         $data = json_decode($json, $assoc, $depth, $options);
 
