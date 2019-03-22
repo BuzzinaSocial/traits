@@ -84,7 +84,7 @@ class JsonRenderTest extends TestCase
      */
     public function testJsonEncodeSuccess($object)
     {
-        $this->assertInternalType('string', $this->json_render->jsonEncode($object));
+        $this->assertIsString($this->json_render->jsonEncode($object));
     }
 
     public function testJsonEncodeFailure()
@@ -136,13 +136,13 @@ class JsonRenderTest extends TestCase
     public function testToArraySuccess($json)
     {
         $json_array = $this->json_render->toArray($json);
-        $this->assertInternalType('array', $json_array);
+        $this->assertIsArray($json_array);
         $this->assertEquals(json_decode($json, true), $json_array);
 
         $object = json_decode($json);
         $object_array = $this->json_render->toArray($object);
 
-        $this->assertInternalType('array', $object_array);
+        $this->assertIsArray($object_array);
         $this->assertEquals(json_decode($json, true), $object_array);
     }
 
